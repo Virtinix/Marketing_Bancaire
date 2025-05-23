@@ -21,7 +21,7 @@ modele.fit(x_train, y_train)
 y_pred = modele.predict(x_test)
 
 score = metrics.accuracy_score(y_test, y_pred)
-print("Précision du modèle :", score*100, "%")
+print("Précision du modèle :", round(score*100, 2), "%")
 
 def predict_client(client_dict):
     """

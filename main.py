@@ -28,11 +28,11 @@ def test_combinaison(combinaison):
     colonnes_a_encoder = [col for col in combinaison if col in non_numerical_descripteurs]
     
     if colonnes_a_encoder:
-        bank = pandas.get_dummies(bank, columns=colonnes_a_encoder, dtype=int)
+        bank = pandas.get_dummies(bank, columns=colonnes_a_encoder)
 
     t_x = bank.drop(columns=["y"])
     t_y = bank["y"]
-    x_train, x_test, y_train, y_test = train_test_split(t_x, t_y, test_size=0.2, random_state=50)
+    x_train, x_test, y_train, y_test = train_test_split(t_x, t_y, test_size=0.2, random_state=42)
     
     modele = KNeighborsClassifier(n_neighbors=5)
     modele.fit(x_train, y_train)
@@ -50,7 +50,7 @@ def predict_client(client_dict):
     """
     client = pandas.DataFrame([client_dict])
     
-    client = pandas.get_dummies(client, columns=colonnes_a_encoder, dtype=int)
+    client = pandas.get_dummies(client, columns=colonnes_a_encoder)
     
     #ajoute les colonnes manquantes pour que client_df ait les mêmes colonnes que les données d'entraînement
     for colonne in t_x.columns:
